@@ -29,7 +29,8 @@ export const requireGql = (filepath, { resolve = defaultResolve, nowrap = true }
 
   const doc = processDoc(createDoc(source, filepath, resolve))
   const docsMap = createDocPerOp(doc)
-  return nowrap && !doc.isMultiOp ? docsMap.default : docsMap
+  // return nowrap && !doc.isMultiOp ? docsMap.default : docsMap;
+  return nowrap ? docsMap.default : docsMap // prannayb: only return the default values to matc h with webpack graphql-tag/loader export format
 }
 
 function callerDirname() {

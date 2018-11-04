@@ -1,10 +1,5 @@
 let definitionRefs
 export function createDocPerOp({ ast: doc, isOnlyFrags }) {
-  if (doc.definitions.length === 1) {
-    const { name } = doc.definitions[0]
-    return name ? { default: doc, [name.value]: doc } : { default: doc }
-  }
-
   definitionRefs = {}
   doc.definitions.forEach(def => {
     if (def.name) {
@@ -14,7 +9,7 @@ export function createDocPerOp({ ast: doc, isOnlyFrags }) {
     }
   })
 
-  let docs = {}
+  let docs = doc
 
   if (!isOnlyFrags) {
     while (doc.definitions[0].kind !== 'OperationDefinition') {
@@ -30,7 +25,12 @@ export function createDocPerOp({ ast: doc, isOnlyFrags }) {
       }
 
       const curOpDoc = createSingleOperationDoc(doc, op.name.value)
+      // make same format of export as graphql-tag/loader
+      // the exported object is the top level query
+      // with all other queries/fragments as queryNAme:queryDefinition pairs in that object
       if (i === 0) {
+        // first definition is the main export
+        // also set default value to maintain default export compat
         docs.default = curOpDoc
         docs[op.name.value] = curOpDoc
       } else {

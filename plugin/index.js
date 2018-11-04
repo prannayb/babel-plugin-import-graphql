@@ -37,7 +37,7 @@ export default ({ types: t, template }) => ({
           // Analyze the file, returning one of the following...
           // For schema-like files: string - the GraphQL source code
           // For op/frag files: object - map of names to GraphQL Documents
-          const result = requireGql(absPath, { resolve, nowrap: false })
+          const result = requireGql(absPath, { resolve, nowrap: true }) // prannayb: set nowrap to true to only return the toplevel query
 
           const importNames = curPath.node.specifiers
           if (typeof result === 'string') {
