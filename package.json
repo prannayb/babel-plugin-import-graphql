@@ -1,6 +1,6 @@
 {
   "name": "@tasksclient/babel-plugin-import-graphql",
-  "version": "2.6.2-alpha.2",
+  "version": "2.6.2-alpha.3",
   "description": "Modified version of Babel graphql import plugin v2.6.2, matches same export format as graphql-tag/loader for webpack",
   "author": "A.J. Roberts <detrohutt@gmail.com>",
   "maintainers": [
@@ -58,6 +58,6 @@
     "prettier": "^1.14.3"
   },
   "engines": {
-    "node": "^10.0.0"
+    "node": ">=8.11.1"
   }
 }
